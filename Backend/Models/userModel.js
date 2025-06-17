@@ -28,18 +28,18 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        // required: true,
         minLength: [6, 'Password must be at least 6 characters long'],
         select : false
     },
-    phoneNumber: {
+    phoneNumber: { 
         type: String,
-        required: true,
+        // required: true,
         unique: true,
         minLength: [10, 'Phone number must be at least 10 digits long'],
         match: [/^\d{10}$/, 'Please enter a valid 10-digit phone number']
     },
-    socketId: {
+    socketId: { 
         type: String,
         default: null
     },
@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateAuthToken = async function() {
-    const token = jwt.sign({ userId: this._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: this._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     return token;
 }
 

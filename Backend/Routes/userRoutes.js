@@ -9,6 +9,6 @@ router.post("/login", login);
 router.get("/profile", authMiddleware.auth, userProfile);
 router.get("/logout", authMiddleware.auth, logout);
 
-// export 
+// export  
 
 module.exports= router; 

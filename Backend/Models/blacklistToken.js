@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const blacklistTokenSchema = new mongoose.Schema({
     token: {
-        type: String,
-        required: true,
+        type: String, 
         unique: true
     },
     blacklistedAt: {

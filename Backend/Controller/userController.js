@@ -3,13 +3,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const blacklistToken = require("../Models/blacklistToken");
 
-// register a new user
-
+// register a new user 
+ 
 exports.register = async (req, res) => {
     try{
-        const { fullName:{firstName, middleName, lastName}, email, password, phoneNumber } = req.body;
+        const { fullName:{firstName, middleName, lastName}, email, password, phoneNumber } = req.body;    //
         // check if user already exists
-        const existingUser = await User.find({email,phoneNumber});
+        const existingUser = await User.findOne({$or: [{ email }, { phoneNumber}]});
         if(existingUser) {
             return res.status(400).json({ message: 'User already exists', success : false, });
         }
@@ -143,9 +143,10 @@ exports.userProfile = async (req, res) => {
 }
 
 exports.logout = async (req, res) => {
-    res.clearCookie("token");
+    
     const token  = req.cookies.token || req.body.token || req.header("Authorization")?.replace("Bearer ", "").trim();
     await blacklistToken.create({ token });
+    res.clearCookie("token");
     return res.status(200).json({
         success: true,
         message: "User logged out successfully"

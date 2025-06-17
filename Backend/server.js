@@ -11,19 +11,29 @@ app.use(cookieParser());
 
 require("dotenv").config();
 
-const PORT = process.env.PORT || 4000;
+const cors = require('cors');
+app.use(cors());
+
 
 // middleware
 
 app.use(express.json());
 
+const PORT = process.env.PORT || 4000;
 
 
-const authRoutes = require("./Routes/userRoutes");
+
+
+
+const userRoutes = require("./Routes/userRoutes");
+const CaptainRoutes = require("./Routes/captainRoute");
+
 
 // mount 
 
-app.use("/api/v1",authRoutes);
+app.use("/api/v1",userRoutes);
+app.use("/api/v1/captain",CaptainRoutes);
+
 
 // fetch db
 
@@ -39,3 +49,4 @@ app.listen(PORT,()=>{
 app.get("/",(req,res)=>{
     res.send(`<h1> uber clone loading...</h1>`)
 })
+ 

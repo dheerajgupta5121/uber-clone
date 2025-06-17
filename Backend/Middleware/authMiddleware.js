@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const User = require("../Models/userModel");
 require("dotenv").config();
-// const blacklistToken = require('../Models/blacklistTokenModel');
+const blacklistToken = require('../Models/blacklistToken');
+const captainModel = require('../Models/captainModel');
 
 exports.auth = async (req, res, next) => {
     try {
@@ -16,7 +17,10 @@ exports.auth = async (req, res, next) => {
 
         const token = bodyToken || cookieToken || headerToken;
         
-        const isBlacklisted = await User.findOne({ token });
+        const isBlacklisted = await User.findOne({ token });   // why here user is used instead of blacklistToken?
+
+        
+        // Check if the token is blacklisted
 
         if (isBlacklisted) {
 
@@ -55,3 +59,32 @@ exports.auth = async (req, res, next) => {
         });
     }
 };
+
+exports.authCaptain = async (req, res, next) => {
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[ 1 ];
+
+
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized, token missing' });
+    }
+
+    const isBlacklisted = await blacklistToken.findOne({ token: token });
+
+
+
+    if (isBlacklisted) {
+        return res.status(401).json({ message: 'Unauthorized,blacklisted' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const captain = await captainModel.findById(decoded._id)
+        req.captain = captain;
+
+        return next()
+    } catch (err) {
+        console.log(err);
+
+        res.status(401).json({ message: 'token is invalid' });
+    }
+}
