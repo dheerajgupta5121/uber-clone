@@ -11,4 +11,4 @@ router.get("/logout", authMiddleware.auth, logout);
 
 // export  
 
-module.exports= router; 
+module.exports= router;  
