@@ -7,7 +7,7 @@ const {register, login, userProfile, logout} = require('../Controller/userContro
 router.post("/register", register);
 router.post("/login", login);
 router.get("/profile", authMiddleware.auth, userProfile);
-router.get("/logout", authMiddleware.auth, logout);
+router.get("/logout", authMiddleware.auth, logout); 
 
 // export  
 
