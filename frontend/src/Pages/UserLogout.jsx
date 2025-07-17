@@ -10,7 +10,7 @@ export const UserLogout = () => {
     axios.get(`${import.meta.env.VITE_API_URL}/api/v1/logout`, {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        } 
     }).then((response) => {
         if (response.status === 200) {
             localStorage.removeItem('token')

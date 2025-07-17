@@ -47,42 +47,6 @@ const UserSignup = () => {
   }
 
 
-//   const submitHandler = async (e) => {
-//   e.preventDefault();
-
-//   const newUser = {
-//     fullName: {
-//       firstName,
-//       lastName,
-//     },
-//     email,
-//     password,
-//     phoneNumber,
-//   };
-
-//   console.log("Submitting new user:", newUser);
-
-//   try {
-//     const response = await axios.post(
-//       `${import.meta.env.VITE_BASE_URL}/api/v1/register`,
-//       newUser
-//     );
-
-//     console.log("Server responded:", response.status, response.data);
-
-//     if (response.status === 201 || response.status === 200) {
-//       alert("Signup successful. Redirecting to login...");
-//       navigate("/login");
-//     } else {
-//       alert("Unexpected status code: " + response.status);
-//     }
-//   } catch (err) {
-//     console.error("Signup failed:", err.response?.data || err.message);
-//     alert("Signup failed. See console for details.");
-//   }
-// };
-
-
   return (
     <div>
       <div className='p-7 h-screen flex flex-col justify-between'>

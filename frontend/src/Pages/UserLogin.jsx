@@ -7,7 +7,6 @@ const UserLogin = () => {
 
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
-  // const [ userData, setUserData ] = useState({})
   const { user, setUser } = React.useContext(UserDataContext)
   const navigate = useNavigate();
 
@@ -29,7 +28,7 @@ const UserLogin = () => {
 
     setEmail('')
     setPassword('')
-  }
+  } 
 
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>
