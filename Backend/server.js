@@ -36,7 +36,7 @@ const rideRoutes = require("./Routes/rideRoutes");
 app.use("/api/v1",userRoutes);
 app.use("/api/v1/captain",CaptainRoutes);
 app.use("/api/v1/maps",mapRoutes);
-app.use("/api/v1/rides",rideRoutes); 
+app.use("/api/v1/rides",rideRoutes);  
 
 
 // fetch db
